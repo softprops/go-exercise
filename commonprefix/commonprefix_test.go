@@ -11,7 +11,24 @@ func TestSolution(t *testing.T) {
 		args args
 		want string
 	}{
-		// TODO: Add test cases.
+		{
+			name: "a",
+			args: args{
+				strs: []string{
+					"flower", "flow", "flight",
+				},
+			},
+			want: "fl",
+		},
+		{
+			name: "b",
+			args: args{
+				strs: []string{
+					"dog", "racecar", "car",
+				},
+			},
+			want: "",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
