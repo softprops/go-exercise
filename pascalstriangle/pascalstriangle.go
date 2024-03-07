@@ -9,7 +9,7 @@
 package pascalstriangle
 
 func Solution(numRows int) [][]int {
-	rows := [][]int{}
+	rows := make([][]int, numRows)
 	for i := 0; i < numRows; i++ {
 		row := make([]int, i+1)
 		row[0], row[len(row)-1] = 1, 1
@@ -17,7 +17,7 @@ func Solution(numRows int) [][]int {
 			prev := rows[i-1]
 			row[j] = prev[j-1] + prev[j]
 		}
-		rows = append(rows, row)
+		rows[i] = row
 	}
 	return rows
 }
