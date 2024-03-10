@@ -27,7 +27,7 @@ func sort(freq map[int]int, k int) []int {
 	}
 
 	// quick select
-	l, r, k := 0, len(keys)-1, k-1
+	l, r, k := 0, len(keys)-1, len(keys)-k
 	for l < r {
 		p := partition(freq, keys, l, r)
 		if p < k {
