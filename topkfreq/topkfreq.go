@@ -12,11 +12,8 @@ func Solution(nums []int, k int) []int {
 		freq[n]++
 	}
 
-	// (quickselect) sort by freq
-	sorted := sort(freq, k)
-
-	// return slice of top k
-	return sorted[len(sorted)-k:]
+	// return slice of top k (quickselect) sorted values
+	return sort(freq, k)[len(freq)-k:]
 }
 
 func sort(freq map[int]int, k int) []int {
