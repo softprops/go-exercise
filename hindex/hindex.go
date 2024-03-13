@@ -12,6 +12,7 @@ import (
 )
 
 func Solution(citations []int) int {
+	// sort in asc order
 	slices.Sort(citations)
 	h := len(citations)
 	for _, c := range citations {
