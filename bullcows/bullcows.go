@@ -17,7 +17,6 @@ package bullcows
 
 import (
 	"fmt"
-	"log"
 )
 
 func Solution(secret, guess string) string {
@@ -29,7 +28,6 @@ func Solution(secret, guess string) string {
 			continue
 		}
 		is, ig := int(s-'0'), int(guess[i]-'0')
-		log.Printf("is %v ig %v", is, ig)
 		if nums[is] < 0 {
 			cows++
 		}
