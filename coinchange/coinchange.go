@@ -11,6 +11,9 @@ import (
 	"math"
 )
 
+// time: O(amount + len(coins))
+//
+// space: O(amount)
 func Solution(coins []int, amount int) int {
 	unknown := math.MaxInt
 	cache := make([]int, amount+1)
