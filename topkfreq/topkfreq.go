@@ -13,10 +13,10 @@ func Solution(nums []int, k int) []int {
 	}
 
 	// return slice of top k (quickselect) sorted values
-	return sort(freq, k)[len(freq)-k:]
+	return sorted(freq, k)[len(freq)-k:]
 }
 
-func sort(freq map[int]int, k int) []int {
+func sorted(freq map[int]int, k int) []int {
 	// slice of keys
 	keys := make([]int, 0, len(freq))
 	for key := range freq {
@@ -35,7 +35,7 @@ func sort(freq map[int]int, k int) []int {
 			r = p - 1
 		} else {
 			// we've "sorted" it out
-			return keys
+			break
 		}
 	}
 
