@@ -1,26 +1,38 @@
 package bufferedio
 
 import (
-	"errors"
 	"io"
 )
 
-var (
-	EofError = errors.New("end of file")
-)
-
 type BufWriter struct {
-	buf     []int
+	cap     int
+	buf     []byte
 	wrapped io.Writer
+	pos     int
 }
 
-func New(cap int, wrapped io.Writer) *BufWriter {
+func New(wrapped io.Writer, cap int) *BufWriter {
 	return &BufWriter{
-		buf:     make([]int, cap),
+		cap:     cap,
+		buf:     make([]byte, cap),
 		wrapped: wrapped,
 	}
 }
 
-func (b *BufWriter) Read(p []byte) (n int, err error) {
-	return -1, EofError
+func (bw *BufWriter) Write(data []byte) {
+	for _, b := range data {
+		bw.buf[bw.pos] = b
+		bw.pos++
+		if bw.pos == bw.cap {
+			bw.Flush()
+		}
+	}
+}
+
+func (bw *BufWriter) Flush() {
+	if bw.pos > 0 {
+		bw.wrapped.Write(bw.buf)
+		bw.pos = 0
+		bw.buf = make([]byte, bw.cap)
+	}
 }
