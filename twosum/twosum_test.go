@@ -2,6 +2,7 @@ package twosum
 
 import (
 	"reflect"
+	"slices"
 	"testing"
 )
 
@@ -34,6 +35,7 @@ func TestSolution(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			actual := Solution(tt.nums, tt.target)
+			slices.Sort(actual)
 			if !reflect.DeepEqual(actual, tt.expect) {
 				t.Fatalf(`expected %v but got %v`, tt.expect, actual)
 			}
