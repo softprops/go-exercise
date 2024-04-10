@@ -31,7 +31,7 @@ func good(word string, limits []int) bool {
 	for _, r := range word {
 		index := r - 'a'
 		wordChars[index]++
-		// if we have more chars at this alphabet index and possible
+		// if we have more chars at this alphabet index than possible, it's not good
 		if wordChars[index] > limits[index] {
 			return false
 		}
