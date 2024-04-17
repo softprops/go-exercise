@@ -1,16 +1,19 @@
 package ransomnote
 
 func Solution(ransomNote, magazine string) bool {
-	letters := make(map[rune]int)
+	letters := make([]int, 26)
 	for _, r := range magazine {
-		letters[r] += 1
+		letters[index(r)]++
 	}
 	for _, r := range ransomNote {
-		if count, ok := letters[r]; ok && count > 0 {
-			letters[r] -= 1
-		} else {
+		if letters[index(r)] < 1 {
 			return false
 		}
+		letters[index(r)]--
 	}
 	return true
+}
+
+func index(r rune) rune {
+	return r - 'a'
 }
