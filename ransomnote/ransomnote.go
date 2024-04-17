@@ -1,5 +1,7 @@
 package ransomnote
 
+// space O(n)
+// time O(n*m)
 func Solution(ransomNote, magazine string) bool {
 	letters := make([]int, 26)
 	for _, r := range magazine {
