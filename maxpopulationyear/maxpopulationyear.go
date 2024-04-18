@@ -14,20 +14,37 @@
 package maxpopulationyear
 
 // time O(n)
-// space O(n)
+// space O(maxYear - minYear + 1)
 func Solution(logs [][]int) int {
-	pops, max := make([]int, 2051), 1950
+	// minYear, maxYear = 1950, 2050
+	minYear, maxYear := lifeRange(logs)
+	return solution(logs, minYear, maxYear)
+}
+
+func solution(logs [][]int, firstYear, lastYear int) int {
+	// minimize space complexity
+	pops := make([]int, lastYear-firstYear+1)
 	for _, l := range logs {
 		// record "getting on and off the bus"
-		pops[l[0]]++
-		pops[l[1]]--
+		pops[l[0]-firstYear]++
+		pops[l[1]-firstYear]--
 	}
-	for i := 1950; i < 2050; i++ {
+	maxIndex := 0
+	for i := 1; i < len(pops); i++ {
 		// prefix sum keep track of max
 		pops[i] += pops[i-1]
-		if pops[i] > pops[max] {
-			max = i
+		if pops[i] > pops[maxIndex] {
+			maxIndex = i
 		}
 	}
-	return max
+	return maxIndex + firstYear
+}
+
+func lifeRange(logs [][]int) (int, int) {
+	minYear, maxYear := 0, 0
+	for _, l := range logs {
+		minYear = min(minYear, l[0])
+		maxYear = max(maxYear, l[1])
+	}
+	return minYear, maxYear
 }
